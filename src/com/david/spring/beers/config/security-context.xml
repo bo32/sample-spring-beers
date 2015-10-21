@@ -12,7 +12,7 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-	<security:http use-expressions="true">
+<security:http use-expressions="true">
 		<security:intercept-url pattern="/createBeer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/doCreateBeer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/doDeleteBeer/*" access="isAuthenticated()" />
@@ -22,13 +22,28 @@
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/createAccount" access="permitAll" />
-		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/beers" access="permitAll" />
 		<security:intercept-url pattern="/showBeer/*" access="permitAll" />
-		<!--  static resources like css files, images... -->
 		<security:intercept-url pattern="/static/**" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
-			authentication-failure-url="/login?error=true" />
+					username-parameter="j_username" 
+					password-parameter="j_password" 
+					login-processing-url="/j_spring_security_check" 
+					authentication-failure-url="/login?login_error=1" />
 	</security:http>
+	
+	
+	<!--  <security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<security:http use-expressions="true">
+		<security:form-login login-page="/login" authentication-failure-url="/login?error" />
+		<security:intercept-url pattern="/createBeer" access="isAuthenticated()" />
+		<security:intercept-url pattern="/" access="permitAll" />
+	</security:http>-->
 </beans>

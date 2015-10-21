@@ -10,6 +10,7 @@
 
 <p>Beer properly created.</p>
 <p><a href="${pageContext.request.contextPath}/beers">See all beers.</a></p>
+
 <p><a href="${pageContext.request.contextPath}/createBeer">Create another beer.</a></p> 
 
 </body>

@@ -90,11 +90,23 @@ table {
 }
 
 .validAlert {
-	background-color: #c2ffb8;
-	border: 1px solid #19a819;
-	-moz-border-radius: 7px;
-	-webkit-border-radius: 7px;
-	border-radius: 7px;
+	background-color: #DFF0D8;
+	border: 1px solid #D6E9C6;
+	color: #3C763D;
+	padding: 8px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border-radius: 4px;
+}
+
+.errorAlert {
+	background-color: #F2DEDE;
+	border: 1px solid #EBCCD1;
+	color: #A94442;
+	padding: 8px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border-radius: 4px;
 }
 
 .error {

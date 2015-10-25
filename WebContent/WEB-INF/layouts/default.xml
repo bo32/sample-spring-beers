@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="beers.base" template="/WEB-INF/templates/default.jsp">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+	</definition>
+	
+	<definition name="home" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
+	</definition>
+	
+	<definition name="beers" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/beers.jsp" />
+	</definition>
+	
+	<definition name="login" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp" />
+	</definition>
+	
+	<definition name="showBeer" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/showBeer.jsp" />
+	</definition>
+	
+	<definition name="createBeer" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/createBeer.jsp" />
+	</definition>
+	
+	<definition name="editBeer" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/editBeer.jsp" />
+	</definition>
+	
+	<definition name="newAccount" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/newAccount.jsp" />
+	</definition>
+</tiles-definitions>

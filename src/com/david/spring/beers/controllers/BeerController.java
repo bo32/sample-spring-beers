@@ -52,7 +52,7 @@ public class BeerController {
 		}
 		beerService.insertBeer(beer);
 		model.addAttribute("message", "Beer successfully created.");
-		model.addAttribute("css", "success");
+		model.addAttribute("css", "info");
 		return showBeers(model);
 	}
 	
@@ -69,6 +69,7 @@ public class BeerController {
 		beerService.updateBeer(beer);
 		String message = "Beer successfully updated.";
 		model.addAttribute("message", message);
+		model.addAttribute("css", "info");
 		return showBeers(model);
 	}
 	
@@ -76,7 +77,7 @@ public class BeerController {
 	public String deleteBeer(Model model, @PathVariable int id) {
 		beerService.removeBeer(id);
 		model.addAttribute("message", "Beer successfully deleted.");
-		model.addAttribute("css", "success");
+		model.addAttribute("css", "info");
 		return showBeers(model);
 	}
 	

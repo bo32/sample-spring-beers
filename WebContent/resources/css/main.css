@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
 body {
-    width: 600px;
-    margin: 40px auto;
+    //width: 90%;
+    //margin: 40px auto;
     font-family: 'trebuchet MS', 'Lucida sans', Arial;
     font-size: 14px;
     color: #444;
@@ -10,7 +10,34 @@ body {
 
 table {
     border-spacing: 0;
-    width: 100%;    
+    width: 80%;    
+}
+
+div.footer {
+	border-top: 1px solid #AAAAAA; 
+}
+
+p.footer {
+	font-style: italic;
+	color: #AAAAAA;
+	text-align: right;
+	margin-right: 20px; 
+}
+
+span.smallRightMargin {
+	margin-right: 10px;
+}
+
+
+div.withMargins {
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+}
+
+legend {
+	color: #008CBA;
 }
 
 .beerTable {
@@ -108,6 +135,10 @@ table {
 	margin-top: 10px;
 	border-radius: 4px;
 }
+
+li:hover {
+    background-color: #008CBA;
+} 
 
 .error {
 	font-size: small;

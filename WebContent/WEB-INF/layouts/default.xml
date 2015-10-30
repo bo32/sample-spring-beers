@@ -45,4 +45,25 @@
 		<put-attribute name="title" value="Spring Beers" />
 		<put-attribute name="content" value="/WEB-INF/tiles/newAccount.jsp" />
 	</definition>
+	
+	<!-- <definition name="admin-template" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="admin" />
+	</definition>
+	
+	<definition name="admin" template="/WEB-INF/tiles/admin.jsp">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="users" value="/WEB-INF/tiles/users.jsp" cascade="true"/>
+	</definition>-->
+	
+	<definition name="admin" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" >
+		<definition name="admin-inside" template="/WEB-INF/tiles/admin.jsp">
+			<put-attribute name="title" value="Spring Beers" />
+			<put-attribute name="users" value="/WEB-INF/tiles/users.jsp"/>
+		</definition>
+		</put-attribute>
+	</definition>
+	
 </tiles-definitions>

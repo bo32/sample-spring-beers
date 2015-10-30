@@ -12,13 +12,17 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-<security:http use-expressions="true">
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/users" access="hasAuthority('admin')" />
+		<security:intercept-url pattern="/admin" access="hasAuthority('admin')" />
+		<security:intercept-url pattern="/admin-template" access="hasAuthority('admin')" />
 		<security:intercept-url pattern="/createBeer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/doCreateBeer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/doDeleteBeer/*" access="isAuthenticated()" />
 		<security:intercept-url pattern="/doEditBeer/*" access="isAuthenticated()" />
 		<security:intercept-url pattern="/showBeer/*" access="isAuthenticated()" />
 		<security:intercept-url pattern="/editBeer/*" access="isAuthenticated()" />
+		<security:intercept-url pattern="/logout" access="permitAll" />
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/createAccount" access="permitAll" />
@@ -33,5 +37,6 @@
 					password-parameter="j_password" 
 					login-processing-url="/j_spring_security_check" 
 					authentication-failure-url="/login?login_error=1" />
+		<!-- <security:logout logout-success-url="/home" invalidate-session="true" logout-url="/logout" />-->
 	</security:http>
 </beans>

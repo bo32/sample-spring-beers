@@ -1,5 +1,7 @@
 package com.david.spring.beers.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class UserService {
 
 	public boolean existsEmail(String email) {
 		return userDAO.existsEmail(email);
+	}
+	
+	public List<User> getUsers() {
+		return userDAO.getUsers();
 	}
 
 }

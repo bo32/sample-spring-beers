@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+	<!-- 
+<tiles-definitions>
+<definition name="admin.base" template="/WEB-INF/templates/admin.jsp">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
+	</definition>
+	
+	<definition name="users" extends="admin.base">
+		<put-attribute name="content" value="/WEB-INF/tiles/users.jsp" />
+	</definition>
+
+</tiles-definitions>-->

@@ -7,7 +7,7 @@
 	<definition name="beers.base" template="/WEB-INF/templates/default.jsp">
 		<put-attribute name="title" value="Spring Beers" />
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
+		<put-attribute name="content" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
 	
@@ -56,14 +56,36 @@
 		<put-attribute name="users" value="/WEB-INF/tiles/users.jsp" cascade="true"/>
 	</definition>-->
 	
+	<definition name="users" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/users.jsp" />
+	</definition>
+	
+	<definition name="editUser" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/editUser.jsp" />
+	</definition>
+	
+	<definition name="database" extends="beers.base">
+		<put-attribute name="title" value="Spring Beers" />
+		<put-attribute name="content" value="/WEB-INF/tiles/database.jsp" />
+	</definition>
+	
 	<definition name="admin" extends="beers.base">
 		<put-attribute name="title" value="Spring Beers" />
-		<put-attribute name="content" >
-		<definition name="admin-inside" template="/WEB-INF/tiles/admin.jsp">
-			<put-attribute name="title" value="Spring Beers" />
-			<put-attribute name="users" value="/WEB-INF/tiles/users.jsp"/>
-		</definition>
-		</put-attribute>
+		<put-attribute name="content" value="admin-inside" />
 	</definition>
+	
+	<definition name="admin-inside" template="/WEB-INF/tiles/admin.jsp">
+		<put-attribute name="users" value="/WEB-INF/tiles/users.jsp"/>
+		<put-attribute name="database" value="/WEB-INF/tiles/database.jsp"/>
+		<put-attribute name="editUser" value="/WEB-INF/tiles/editUser.jsp"/>
+	</definition>
+	
+	<definition name="error" extends="beers.base">
+		<put-attribute name="title" value="Error"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp"></put-attribute>
+	</definition>
+	
 	
 </tiles-definitions>

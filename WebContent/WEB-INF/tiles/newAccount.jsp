@@ -57,23 +57,21 @@
 		<fieldset>
 			<legend>Create account</legend>
 			<label>Username: <sf:input class="control" path="username"
-					name="username" type="text" />
-					<sf:errors class="error" path="username"></sf:errors>
+					name="username" type="text" /> <sf:errors class="error"
+					path="username"></sf:errors>
 			</label> <label>Email:<sf:input class="control" path="email"
-					name="email" type="text" />
-					<sf:errors path="email" class="error"></sf:errors>
+					name="email" type="text" /> <sf:errors path="email" class="error"></sf:errors>
 			</label> <label>Password: <sf:input class="control" path="password"
-					name="password" id="password" type="password" />
-					<sf:errors path="password" class="error"></sf:errors>
+					name="password" id="password" type="password" /> <sf:errors
+					path="password" class="error"></sf:errors>
 			</label> <label>Confirm password:<input class="control"
-				name="confirmPassword" type="password" id="confirmPassword" />
-				<div id="status">
-					<span id="successIcon"><img
-						src="${pageContext.request.contextPath}/static/images/accept.png"></span>
-					<span id="errorIcon"><img
-						src="${pageContext.request.contextPath}/static/images/exclamation.png"></span>
-					<span id="matchPass"></span>
-				</div>
-			</label> <input name="submit" class="button small radius" type="submit" />
+				name="confirmPassword" type="password" id="confirmPassword" /></label> <label
+				id="status"> <span id="successIcon"><img
+					src="${pageContext.request.contextPath}/static/images/accept.png"></span>
+				<span id="errorIcon"><img
+					src="${pageContext.request.contextPath}/static/images/exclamation.png"></span>
+				<span id="matchPass"></span>
+			</label><input name="submit" class="button small radius" type="submit" />
+		</fieldset>
 	</sf:form>
 </div>

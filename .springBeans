@@ -11,6 +11,8 @@
 		<config>src/com/david/spring/beers/config/dao-context.xml</config>
 		<config>src/com/david/spring/beers/config/service-context.xml</config>
 		<config>src/com/david/spring/beers/config/security-context.xml</config>
+		<config>src/com/david/spring/beers/config/actionconfig-context.xml</config>
+		<config>src/com/david/spring/beers/config/validator-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

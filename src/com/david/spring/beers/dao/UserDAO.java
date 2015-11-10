@@ -8,10 +8,11 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.david.spring.beers.dto.User;
 
@@ -19,14 +20,24 @@ import com.david.spring.beers.dto.User;
 public class UserDAO {
 	
 	private NamedParameterJdbcTemplate jdbc;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 	
+	@Transactional
 	public void createUser(User user) {
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(user);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", user.getUsername());
+		params.addValue("password", passwordEncoder.encode(user.getPassword()));
+		params.addValue("email", user.getEmail());
+		params.addValue("enabled", user.isEnabled());
+		params.addValue("authority", user.getAuthority());
+		//BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(user);
 		jdbc.update("insert into users (username, password, enabled, email) values(:username, :password, :enabled, :email);", params);
 		jdbc.update("insert into authorities (username, authority) values(:username, :authority);", params);
 	}
@@ -51,6 +62,20 @@ public class UserDAO {
 				u.setUsername(rs.getString("users.username"));
 				u.setAuthority(rs.getString("authorities.authority"));
 				u.setEnabled(rs.getBoolean("users.enabled"));
+				return u;
+			}
+		});
+	}
+
+	public User getUser(String username) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", username);
+		return jdbc.queryForObject("select u.username, u.password, a.authority from users u, authorities a where u.username=:username and a.username = u.username", params, new RowMapper<User>() {
+			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User u = new User();
+				u.setUsername(rs.getString("username"));
+				u.setPassword(rs.getString("password"));
+				u.setAuthority(rs.getString("authority"));
 				return u;
 			}
 		});

@@ -146,12 +146,13 @@ li:hover {
 	padding: 3px;
 }
 
+
 .light-border, .light-border-without-right  {
-	border-top: 1px solid #eeeeec;
-	border-bottom: 1px solid #eeeeec;
-	border-left: 1px solid #eeeeec;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
 }
 
 .light-border {
-	border-right: 1px solid #eeeeec;
+	border-right: 1px solid #dddddd;
 }

@@ -2,12 +2,11 @@ package com.david.spring.beers.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +20,21 @@ import com.david.spring.beers.services.BeerService;
 public class BeerController {
 	
 	private BeerService beerService;
+	
+//	@Autowired
+//	FileValidator fileValidator;
+//	
+//	@InitBinder
+//	private void initBinder(WebDataBinder binder) {
+//		binder.setValidator(fileValidator);
+//	}
 
 	@Autowired 
 	public void setBeerService(BeerService beerService) {
 		this.beerService = beerService;	
 	}
 	
-	@RequestMapping("/createBeer")
+	@RequestMapping(value="/createBeer")
 	public String createBeer(Model model) {
 		model.addAttribute("beer", new Beer());
 		return "createBeer";
@@ -42,12 +49,25 @@ public class BeerController {
 	}
 	
 	@RequestMapping(value="/doCreateBeer", method=RequestMethod.POST)
-	public String doCreate(Model model, @Valid Beer beer, BindingResult result) {
+	public String doCreate(Model model, @Validated Beer beer, BindingResult result) {
+		System.out.println("---Controller---");
+		System.out.println(beer.getName());
+		System.out.println(beer.getPicture());
+		/*if (!picture.isEmpty()) {
+            try {
+                byte[] bytes = picture.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(name)));
+                stream.write(bytes);
+                stream.close();
+                return "You successfully uploaded " + name + "!";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }*/
 		if (result.hasErrors()) {
-			/*List<ObjectError> errors = result.getAllErrors();
-			for (ObjectError e: errors) {
-				System.out.println(e.getDefaultMessage());
-			}*/
 			return "createBeer";
 		}
 		beerService.insertBeer(beer);

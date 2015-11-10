@@ -18,6 +18,7 @@
   			classpath:/com/david/spring/beers/config/dao-context.xml
   			classpath:/com/david/spring/beers/config/service-context.xml
   			classpath:/com/david/spring/beers/config/security-context.xml
+  			classpath:/com/david/spring/beers/config/validator-context.xml
   		</param-value>
   </context-param>
   <description>Spring Beer Application</description>

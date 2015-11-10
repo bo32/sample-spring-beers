@@ -7,21 +7,25 @@
 
 
 <c:set var="resourcesCtx" value="${pageContext.request.contextPath}" />
-
+<div class="withMargins">
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>Role</th>
 			<th>Enabled</th>
-			<th>Option</th>
+			<th width="100px"></th>
 		</tr>
 		<c:forEach var="user" items="${users}">
 			<tr>
 				<td>${user.username}</td>
 				<td>${user.authority}</td>
 				<td>${user.enabled}</td>
-				<td><span>Reset password</span></td>
+				<td>
+					<a href="${pageContext.request.contextPath}/editUser/${user.username}"><img
+						src="${pageContext.request.contextPath}/static/images/edit.png" /></a>
+					
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
-
+</div>

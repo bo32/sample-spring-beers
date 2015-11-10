@@ -6,8 +6,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,13 @@ import com.david.spring.beers.services.UserService;
 public class LoginController {
 
 	private UserService userService;
-
+    private AuthenticationManager authenticationManager;
+	
+    @Autowired
+	public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
+	
 	@Autowired 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -49,7 +58,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public String createAccount(@Valid User user, BindingResult result) {
+	public String createAccount(Model model, @Valid User user, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
 		if (result.hasErrors())
 			return "newAccount";
 		
@@ -72,7 +81,23 @@ public class LoginController {
 			return "newaccount";
 		}
 		
-		return "beers";
+		model.addAttribute("message", "User " + user.getUsername() + " successfully created.");
+		model.addAttribute("css", "info");
+		authenticateUserAndSetSession(user, request);
+		
+		return "home";
 	}
+	
+	private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        request.getSession();
+
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authenticatedUser = authenticationManager.authenticate(token);
+
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+    }
 
 }

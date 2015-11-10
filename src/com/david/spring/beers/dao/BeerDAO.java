@@ -34,6 +34,7 @@ public class BeerDAO {
 				b.setId(rs.getInt("id"));
 				b.setName(rs.getString("name"));
 				b.setOrigin(rs.getString("origin"));
+				b.setDescription(rs.getString("description"));
 				return b;
 			}
 		});
@@ -46,6 +47,7 @@ public class BeerDAO {
 				b.setId(rs.getInt("id"));
 				b.setName(rs.getString("name"));
 				b.setOrigin(rs.getString("origin"));
+				b.setDescription(rs.getString("description"));
 				return b;
 			}
 		});
@@ -53,7 +55,7 @@ public class BeerDAO {
 
 	public void insertBeer(Beer beer) {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(beer);
-		jdbc.update("insert into beer (name, origin) values(:name, :origin);", params);
+		jdbc.update("insert into beer (name, origin, description, picture) values(:name, :origin, :description, :picture);", params);
 	}
 
 	public void removeBeer(int id) {
@@ -67,7 +69,8 @@ public class BeerDAO {
 		params.addValue("id", beer.getId());
 		params.addValue("name", beer.getName());
 		params.addValue("origin", beer.getOrigin());
-		jdbc.update("update beer set name=:name, origin=:origin where id=:id", params);
+		params.addValue("description", beer.getDescription());
+		jdbc.update("update beer set name=:name, origin=:origin description=:description where id=:id", params);
 	}
 
 }

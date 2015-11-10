@@ -12,7 +12,14 @@
 			<tiles:insertAttribute name="users"></tiles:insertAttribute>
 		</div>
 		<div class="content" id="databasePanel">
-			<p>Database settings</p>
+			<tiles:insertAttribute name="database"></tiles:insertAttribute>
 		</div>
 	</div>
 </div>
+
+<script>
+	function switchContent(whichContent){
+    	$('#usersPanel').children().remove();
+     	$('#usersPanel').load("/pathToYourApp/bodySwitcher.do?method=");
+	}
+</script>

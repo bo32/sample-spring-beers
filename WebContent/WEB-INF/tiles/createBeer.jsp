@@ -25,6 +25,12 @@
 				<sf:textarea type="text" name="description"	path="description" /> 
 				<sf:errors path="description" class="error"></sf:errors>
 			</label>
+			<label>Rating:</label>
+			<sf:select path="rating" name="rating">
+				<c:forEach var="i" begin="1" end="5">
+   					<sf:option value="${i}"></sf:option>
+				</c:forEach>
+			</sf:select>
 			<label>Picture:
 		        <sf:input type="file" path="picture" name="picture" />
 		        <!-- <input type="submit" value="upload" /> -->

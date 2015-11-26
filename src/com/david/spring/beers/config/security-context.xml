@@ -34,6 +34,8 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/showBeer/*"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/showBeerPicture/*"
+			access="isAuthenticated()" />
 		<security:intercept-url pattern="/editBeer/*"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/error"

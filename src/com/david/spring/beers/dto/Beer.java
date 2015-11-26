@@ -2,28 +2,44 @@ package com.david.spring.beers.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
+@Entity
+@Table(name="beer")
 public class Beer {
 	
+	@Id
+	@Column(name="id")
 	private int id;
 	
+	@Column(name="name")
 	@NotNull
 	@Size(min=4, max=100, message="The beer's name must be between 4 and 100 characters.")
 	private String name;
 	
+	@Column(name="origin")
 	@NotNull
 	@Size(min=2, message="The beer's origin cannot be empty.")
 	private String origin;
 	
-	private List<Integer> grades;
+	@OneToMany
+	private List<Integer> ratings;
 	
+	@Column(name="description")
 	private String description;
 	
+	@Column(name="picture")
 	private MultipartFile picture;
+	private byte[] pictureBytes;
+	private int rating;
 
 	public Beer() {
 	}
@@ -59,11 +75,11 @@ public class Beer {
 	}
 
 	public List<Integer> getGrades() {
-		return grades;
+		return ratings;
 	}
 
 	public void setGrades(List<Integer> grades) {
-		this.grades = grades;
+		this.ratings = grades;
 	}
 	
 	
@@ -81,6 +97,22 @@ public class Beer {
 
 	public void setPicture(MultipartFile picture) {
 		this.picture = picture;
+	}
+
+	public byte[] getPictureBytes() {
+		return pictureBytes;
+	}
+
+	public void setPictureBytes(byte[] pictureBytes) {
+		this.pictureBytes = pictureBytes;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 }

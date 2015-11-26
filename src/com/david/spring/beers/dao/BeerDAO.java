@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.david.spring.beers.dto.Beer;
@@ -35,7 +37,19 @@ public class BeerDAO {
 				b.setName(rs.getString("name"));
 				b.setOrigin(rs.getString("origin"));
 				b.setDescription(rs.getString("description"));
+				byte[] bytes = rs.getBytes("picture");
+				b.setPictureBytes(bytes);
 				return b;
+			}
+		});
+	}
+	
+	public String getBeerImage(int id) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+		return jdbc.queryForObject("select * from beer where id=:id", params, new RowMapper<String>() {
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("picture");
 			}
 		});
 	}
@@ -53,9 +67,11 @@ public class BeerDAO {
 		});
 	}
 
-	public void insertBeer(Beer beer) {
+	public int insertBeer(Beer beer) {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(beer);
-		jdbc.update("insert into beer (name, origin, description, picture) values(:name, :origin, :description, :picture);", params);
+		KeyHolder holder = new GeneratedKeyHolder();
+		jdbc.update("insert into beer (name, origin, description, picture) values(:name, :origin, :description, :picture);", params, holder);
+		return holder.getKey().intValue();
 	}
 
 	public void removeBeer(int id) {

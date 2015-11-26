@@ -1,6 +1,10 @@
 package com.david.spring.beers.controllers;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.david.spring.beers.dto.Beer;
 import com.david.spring.beers.services.BeerService;
+import com.david.spring.beers.services.RatingService;
+import com.david.spring.beers.services.UserService;
 
 @Controller
 public class BeerController {
 	
 	private BeerService beerService;
+	private UserService userService;
+	private RatingService ratingService;
 	
 //	@Autowired
 //	FileValidator fileValidator;
@@ -34,25 +42,62 @@ public class BeerController {
 		this.beerService = beerService;	
 	}
 	
+	@Autowired 
+	public void setBeerService(UserService userService) {
+		this.userService = userService;	
+	}
+	
+	@Autowired 
+	public void setRatingService(RatingService ratingService) {
+		this.ratingService = ratingService;	
+	}
+	
 	@RequestMapping(value="/createBeer")
 	public String createBeer(Model model) {
 		model.addAttribute("beer", new Beer());
 		return "createBeer";
 	}
 	
+	@RequestMapping(value="/showBeerPicture/{id}")
+	public String showBeerPicture(@PathVariable int id, HttpServletResponse response) {
+		System.out.println("Controller showBeerPicture");
+		Beer beer = beerService.getBeer(id);
+		
+		
+		response.setContentType("image/png");
+		OutputStream o;
+		try {
+			System.out.println("try");
+		    o = response.getOutputStream();
+		    o.write(beer.getPictureBytes());
+		    o.flush();
+		    o.close();
+		} catch (IOException e) {
+			System.out.println("error");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "showBeerPicture";
+	}
+	
 	@RequestMapping(value="/showBeer/{id}", method=RequestMethod.GET)
-	public ModelAndView showBeer(@PathVariable int id) {
+	public ModelAndView showBeer(Model model, @PathVariable int id) {
+		System.out.println("Controller showBeer");
 		ModelAndView mav = new ModelAndView("showBeer");
 		Beer beer = beerService.getBeer(id);
+		beer.setRating(ratingService.getRating(beer));
 		mav.addObject(beer);
+
+//		model.addAttribute("image", beer.getPictureBytes().toString());
+//		HTTP does not allow this directly. Each image needs to be a separate request to a separate URL. 
+//		So you will need a controller/servlet that accepts the user id as parameter and writes the blob to the response stream 
+//		(and sets the Content-Type header appropriately - image/jpeg, image/png, etc)
+
 		return mav;
 	}
 	
 	@RequestMapping(value="/doCreateBeer", method=RequestMethod.POST)
 	public String doCreate(Model model, @Validated Beer beer, BindingResult result) {
-		System.out.println("---Controller---");
-		System.out.println(beer.getName());
-		System.out.println(beer.getPicture());
 		/*if (!picture.isEmpty()) {
             try {
                 byte[] bytes = picture.getBytes();
@@ -70,7 +115,9 @@ public class BeerController {
 		if (result.hasErrors()) {
 			return "createBeer";
 		}
-		beerService.insertBeer(beer);
+		int beerId = beerService.insertBeer(beer);
+		beer.setId(beerId);
+		ratingService.insertRating(userService.getConnectedUsername(), beer);
 		model.addAttribute("message", "Beer successfully created.");
 		model.addAttribute("css", "info");
 		return showBeers(model);

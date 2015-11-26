@@ -15,6 +15,8 @@
 			</label> 
 			<label>Origin: <sf:input type="text" name="origin" path="origin" />
 			</label> 
+			<label>Description: <sf:textarea type="text" name="description" path="description" />
+			</label>
 			<input class="button small radius" value="Update" type="submit" />
 		</fieldset>
 	</sf:form>

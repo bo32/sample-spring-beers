@@ -25,8 +25,8 @@ public class BeerService {
 		beerDAO.insertBeer(beer);
 	}
 
-	public void insertBeer(Beer beer) {
-		beerDAO.insertBeer(beer);
+	public int insertBeer(Beer beer) {
+		return beerDAO.insertBeer(beer);
 	}
 
 	public Beer getBeer(int id) {
@@ -39,6 +39,10 @@ public class BeerService {
 
 	public void updateBeer(Beer beer) {
 		beerDAO.updateBeer(beer);
+	}
+
+	public String getBeerImage(int id) {
+		return beerDAO.getBeerImage(id);
 	}
 
 }

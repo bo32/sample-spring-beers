@@ -3,6 +3,7 @@ package com.david.spring.beers.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.david.spring.beers.dao.UserDAO;
@@ -36,6 +37,10 @@ public class UserService {
 
 	public User getUser(String username) {
 		return userDAO.getUser(username);
+	}
+
+	public String getConnectedUsername() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 
 }

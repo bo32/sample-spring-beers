@@ -1,19 +1,30 @@
 package com.david.spring.beers.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+@Entity
+@Table(name="users")
 public class User {
+	
 	@Size(min=3, max=30)
 	@NotNull
+	@Column(name="username")
 	private String username;
+	
 	@Size(min=4, max=60)
 	@NotNull
+	@Column(name="password")
 	private String password;
+	
 	@NotNull
 	@Email
+	@Column(name="email")
 	private String email;
 	private String authority;
 	private boolean enabled = false;

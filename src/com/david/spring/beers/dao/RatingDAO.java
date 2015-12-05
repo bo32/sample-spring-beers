@@ -44,7 +44,6 @@ public class RatingDAO {
 	public void insertRating(String username, Beer beer) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", username);
-		System.out.println(beer.getId());
 		params.addValue("beerId", beer.getId());
 		params.addValue("rating", beer.getRating());
 		jdbc.update("insert into beer_rating (username, beer_id, rating) values(:username, :beerId, :rating);", params);

@@ -6,19 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css" />	
-	
+	<title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/collapse.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/buttons.css" />
+
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/foundation/css/foundation.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/foundation/css/foundation.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/foundation/css/normalize.css" />	
-	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/foundation/css/normalize.css" />
+
 	<script src="${pageContext.request.contextPath}/static/foundation/js/vendor/jquery.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/foundation/js/foundation.min.js"></script>
-	
-	
-	
-	
 </head>
 <body>
 	<div>
@@ -30,8 +28,12 @@
 	<div>
 		<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 	</div>
-	<script>
-      $(document).foundation().foundation('joyride', 'start');
-    </script>
 </body>
+
+
+<script type="text/javascript">
+	jQuery(function($) {
+		$(document).foundation();
+	});
+</script>
 </html>

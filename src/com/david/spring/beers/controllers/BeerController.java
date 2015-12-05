@@ -60,7 +60,6 @@ public class BeerController {
 	
 	@RequestMapping(value="/showBeerPicture/{id}")
 	public String showBeerPicture(@PathVariable int id, HttpServletResponse response) {
-		System.out.println("Controller showBeerPicture");
 		Beer beer = beerService.getBeer(id);
 		
 		
@@ -82,7 +81,6 @@ public class BeerController {
 	
 	@RequestMapping(value="/showBeer/{id}", method=RequestMethod.GET)
 	public ModelAndView showBeer(Model model, @PathVariable int id) {
-		System.out.println("Controller showBeer");
 		ModelAndView mav = new ModelAndView("showBeer");
 		Beer beer = beerService.getBeer(id);
 		beer.setRating(ratingService.getRating(beer));

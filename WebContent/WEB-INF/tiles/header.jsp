@@ -1,9 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
 
-
-<nav class="top-bar" data-topbar role="navigation">
+<div class="fixed">
+<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
 	<ul class="title-area">
 		<li class="name">
 			<h1>
@@ -24,10 +25,10 @@
 			
 			<sec:authorize access="hasAuthority('admin')">
 				<li class="has-dropdown"><a href="#"><span><img
-						src="${pageContext.request.contextPath}/static/images/darth-vader.png" /></span><span>Admin</span></a>
+						src="${pageContext.request.contextPath}/static/images/users/darth_vader.png" /></span><span>Admin</span></a>
 				<ul class="dropdown">
 					<li><a href="${pageContext.request.contextPath}/users"><span><img
-						src="${pageContext.request.contextPath}/static/images/users.png" /></span><span> Users</span></a></li>
+						src="${pageContext.request.contextPath}/static/images/users/users.png" /></span><span> Users</span></a></li>
 					<li><a href="${pageContext.request.contextPath}/database"><span><img
 						src="${pageContext.request.contextPath}/static/images/database.png" /></span><span> Database</span></a></li>
 				</ul></li>
@@ -35,10 +36,16 @@
 			
 			<sec:authorize access="!isAuthenticated()">
 				<li><a href="${pageContext.request.contextPath}/login"><span><img
-						src="${pageContext.request.contextPath}/static/images/user.png" /></span><span>Login</span></a></li>
+						src="${pageContext.request.contextPath}/static/images/users/user.png" /></span><span>Login</span></a></li>
 			</sec:authorize>
 			
 			<sec:authorize access="isAuthenticated()">
+				<li class="has-dropdown"><a href="#"><span><img
+						src="${pageContext.request.contextPath}/static/images/users/user_shadow.png" /></span><span> Profile</span></a>
+				<ul class="dropdown">
+					<li><a href="${pageContext.request.contextPath}/users"><span>Change password</span></a></li>
+					<li><a href="${pageContext.request.contextPath}/users"><span>Change information</span></a></li>
+				</ul></li>
 				<li>
 					<a href="<c:url value="/logout" />">
 						<span><img src="${pageContext.request.contextPath}/static/images/logout.png" /></span>
@@ -54,3 +61,4 @@
     </ul> -->
 	</section>
 </nav>
+</div> 	

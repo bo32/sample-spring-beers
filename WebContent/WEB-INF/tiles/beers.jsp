@@ -44,7 +44,9 @@
 	</table>
 
 	<p>
-		<a href="${pageContext.request.contextPath}/createBeer">Create a
-			beer.</a>
+		<a href="${pageContext.request.contextPath}/createBeer"><button class="button button-primary button-circle button-tiny"><i class="fa fa-plus"></i></button><span>Create a
+			beer.</span></a>
+		<a href="#" class="button button-primary button-rounded button-small">Create beer</a>
+		<a href="#" class="button button-primary button-rounded button-small">Back</a>
 	</p>
 </div>

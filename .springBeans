@@ -13,6 +13,7 @@
 		<config>src/com/david/spring/beers/config/security-context.xml</config>
 		<config>src/com/david/spring/beers/config/actionconfig-context.xml</config>
 		<config>src/com/david/spring/beers/config/validator-context.xml</config>
+		<config>test/com/david/spring/beers/test/config/datasource-config.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
